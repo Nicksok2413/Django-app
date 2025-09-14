@@ -27,14 +27,10 @@ SECRET_KEY = 'django-insecure-hvxn%qq=gyw^4*o2lo1#bw0=wh#ux9s8h!=@c608arf_gz3+^7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "0.0.0.0",
-]
+ALLOWED_HOSTS = []
 
 INTERNAL_IPS = [
     "127.0.0.1",
-    "0.0.0.0",
 ]
 
 # Application definition
@@ -46,22 +42,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admindocs',
     'django.contrib.sitemaps',
 
     'debug_toolbar',
-    'django_filters',
-    'drf_spectacular',
     'rest_framework',
 
     'shopapp.apps.ShopappConfig',
     'myauth.apps.MyauthConfig',
-    'myapiapp.apps.MyapiappConfig',
-    'blogapp.apps.BlogappConfig',
 ]
 
 MIDDLEWARE = [
-    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -69,10 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'django.contrib.admindocs.middleware.XViewMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -116,8 +103,6 @@ CACHES = {
     }
 }
 
-#  По умолчанию = 600 секунд - 10 минут
-CACHE_MIDDLEWARE_SECONDS = 200 # Кеширование на 200 секунд
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -164,59 +149,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = reverse_lazy("myauth:about-me")
 LOGIN_URL = reverse_lazy("myauth:login")
-
-# DRF
-
-REST_FRAMEWORK = {
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 10,
-    "DEFAULT_FILTER_BACKENDS": [
-        "django_filters.rest_framework.DjangoFilterBackend",
-    ],
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema"
-}
-
-SPECTACULAR_SETTINGS = {
-    "TITLE": "My site Project API",
-    "DESCRIPTION": "My site with shop app and custom auth",
-    "VERSION": "1.0.0",
-    "SERVE_INCLUDE_SCHEMA": False,
-}
-
-# Logging
-
-# LOGFILE_NAME = BASE_DIR / "log.txt"
-# # LOGFILE_SIZE = 400  # 400 bytes
-# LOGFILE_SIZE = 1 * 1024 * 1024  # 1 Mb
-# LOGFILE_COUNT = 3
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "%(asctime)s [%(levelname)s] %(name)s %(message)s"
-        },
-    },
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
-            "formatter": "verbose",
-        },
-        # "logfile": {
-        #     # "class": "logging.handlers.TimedRotatingFileHandler",  #  Ротация логов по дням
-        #     "class": "logging.handlers.RotatingFileHandler",
-        #     "filename": LOGFILE_NAME,
-        #     "maxBytes": LOGFILE_SIZE,
-        #     "backupCount": LOGFILE_COUNT,
-        #     "formatter": "verbose",
-        # }
-    },
-    "root": {
-        "level": "INFO",
-        "handlers": [
-            "console",
-            # "logfile",
-        ],
-    },
-}
