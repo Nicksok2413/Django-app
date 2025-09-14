@@ -1,0 +1,39 @@
+{% extends 'myauth/base.html' %}
+
+{% block title %}
+    Update profile for {{ user_obj.username }}
+{% endblock %}
+
+{% block body %}
+    <p>Logged user: {% firstof user.username 'Anonymous' %}</p>
+    <h1>Update profile for {{ user_obj.username }}</h1>
+    <div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <h2>User details</h2>
+                {{ user_form.as_p }}
+            </div>
+            <div>
+                <h2>Profile details</h2>
+                {{ profile_form.as_p }}
+
+                {% if profile_form.instance.avatar %}
+                    <p>Current avatar:</p>
+                    <img src="{{ profile_form.instance.avatar.url }}" alt="{{ profile_form.instance.avatar.name }}" width="150px">
+                {% else %}
+                    <p>No avatar set.</p>
+                {% endif %}
+
+            </div>
+            <br>
+            <button type="submit">Update</button>
+        </form>
+        <br>
+        <div>
+            <a href="{% url 'myauth:user-profile' pk=user_obj.pk%}">
+                Back to profile
+            </a>
+        </div>
+    </div>
+{% endblock %}

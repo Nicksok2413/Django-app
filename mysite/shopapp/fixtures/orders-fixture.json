@@ -1,0 +1,17 @@
+[
+  {
+    "model": "shopapp.order",
+    "pk": 1,
+    "fields": {
+      "delivery_address": "123 Main st",
+      "promocode": "BLACKFRIDAY",
+      "created_at": "2025-09-01T16:46:08.416Z",
+      "user": 1,
+      "products": [
+        2,
+        1,
+        3
+      ]
+    }
+  }
+]
