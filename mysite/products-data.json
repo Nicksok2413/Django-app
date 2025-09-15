@@ -1,0 +1,86 @@
+[
+  {
+    "model": "shopapp.product",
+    "pk": 3,
+    "fields": {
+      "name": "Smartphone",
+      "description": "Iphone",
+      "price": "333.00",
+      "discount": 10,
+      "created_by": 1,
+      "created_at": "2025-08-26T13:25:07.427Z",
+      "archived": false,
+      "preview": ""
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 4,
+    "fields": {
+      "name": "Mouse",
+      "description": "Just a regular mouse",
+      "price": "19.99",
+      "discount": 10,
+      "created_by": 1,
+      "created_at": "2025-08-26T13:52:07.480Z",
+      "archived": false,
+      "preview": ""
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 6,
+    "fields": {
+      "name": "Laptop",
+      "description": "MSI",
+      "price": "899.99",
+      "discount": 25,
+      "created_by": 1,
+      "created_at": "2025-08-29T12:23:33.328Z",
+      "archived": false,
+      "preview": ""
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 7,
+    "fields": {
+      "name": "Desktop",
+      "description": "",
+      "price": "1545.45",
+      "discount": 15,
+      "created_by": 1,
+      "created_at": "2025-09-04T13:01:34.108Z",
+      "archived": false,
+      "preview": ""
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 9,
+    "fields": {
+      "name": "Smartphone 2",
+      "description": "",
+      "price": "299.00",
+      "discount": 10,
+      "created_by": 1,
+      "created_at": "2025-09-08T13:43:08.744Z",
+      "archived": false,
+      "preview": ""
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 14,
+    "fields": {
+      "name": "Laptop 13",
+      "description": "A new one.",
+      "price": "2299.00",
+      "discount": 5,
+      "created_by": 1,
+      "created_at": "2025-09-10T13:31:11.742Z",
+      "archived": false,
+      "preview": ""
+    }
+  }
+]
