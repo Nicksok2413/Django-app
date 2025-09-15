@@ -12,4 +12,5 @@ RUN poetry install --no-root
 
 COPY mysite .
 
+CMD ["python", "manage.py", "collectstatic", "--noinput"]
 CMD ["gunicorn", "mysite.wsgi:application", "--bind", "0.0.0.0:8000"]
