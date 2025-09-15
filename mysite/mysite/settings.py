@@ -10,9 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 import logging.config
 from pathlib import Path
-from os import getenv, path
 
 from django.urls import reverse_lazy
 
@@ -26,18 +26,18 @@ DATABASE_DIR.mkdir(exist_ok=True)
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = getenv(
+SECRET_KEY = os.getenv(
     'DJANGO_SECRET_KET',
     'django-insecure-hvxn%qq=gyw^4*o2lo1#bw0=wh#ux9s8h!=@c608arf_gz3+^7'
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = getenv('DJANGO_DEBUG', "0") == 1
+DEBUG = os.getenv('DJANGO_DEBUG', '0') == 1
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "0.0.0.0",
-] + getenv("DJANGO_ALLOWED_HOSTS", "").split(",")
+] + os.getenv("DJANGO_ALLOWED_HOSTS", "").split(",")
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -62,7 +62,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sitemaps',
 
     'debug_toolbar',
     'rest_framework',
@@ -73,6 +72,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -157,8 +157,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# для Whitenoise
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
@@ -173,7 +183,7 @@ LOGIN_URL = reverse_lazy("myauth:login")
 
 # Logging
 
-LOGLEVEL = getenv("DJANGO_LOGLEVEL", "info").upper()
+LOGLEVEL = os.getenv("DJANGO_LOGLEVEL", "info").upper()
 
 logging.config.dictConfig({
     "version": 1,
