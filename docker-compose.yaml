@@ -1,0 +1,20 @@
+services:
+  app:
+    build:
+      dockerfile: ./Dockerfile
+    container_name: django_app
+    command:
+      - "gunicorn"
+      - "mysite.wsgi:application"
+      - "-bund"
+      - "0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./mysite/database:/app/database
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: "200k"
