@@ -6,7 +6,7 @@ services:
     command:
       - "gunicorn"
       - "mysite.wsgi:application"
-      - "-bund"
+      - "-bind"
       - "0.0.0.0:8000"
     ports:
       - "8000:8000"
